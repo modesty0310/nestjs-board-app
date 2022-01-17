@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Patch,
   Post,
@@ -40,11 +39,7 @@ export class BoardsController {
 
   @Get('/:id')
   getBoardById(@Param('id') id: string): Board {
-    const found = this.boardsService.getBoardById(id);
-    if (!found) {
-      throw new NotFoundException('게시글을 찾을수 없습니다.');
-    }
-    return found;
+    return this.boardsService.getBoardById(id);
   }
 
   @Delete('/:id')
