@@ -33,11 +33,11 @@ export class BoardsController {
   //   );
   // }
 
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // createBoard(@Body() createBoardDto: CreateBoardDto): Board {
-  //   return this.boardsService.createBoards(createBoardDto);
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(createBoardDto);
+  }
 
   @Get('/:id')
   async getBoardById(@Param('id') id: string): Promise<Board> {

@@ -16,18 +16,9 @@ export class BoardsService {
   //   return this.boards;
   // }
 
-  // createBoards(createBoardDto: CreateBoardDto): Board {
-  //   const { title, description } = createBoardDto;
-  //   const board = {
-  //     id: uuid(),
-  //     title,
-  //     description,
-  //     status: BoardStatus.PUBLIC,
-  //   };
-
-  //   this.boards.push(board);
-  //   return board;
-  // }
+  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto);
+  }
 
   async getBoardById(id: string): Promise<Board> {
     const found = await this.boardRepository.findOne(id);
