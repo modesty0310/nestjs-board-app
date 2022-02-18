@@ -20,7 +20,7 @@ export class BoardsService {
     return this.boardRepository.createBoard(createBoardDto);
   }
 
-  async getBoardById(id: string): Promise<Board> {
+  async getBoardById(id: number): Promise<Board> {
     const found = await this.boardRepository.findOne(id);
     if (!found) {
       throw new NotFoundException('게시글을 찾을 수 없습니다.');
@@ -28,14 +28,15 @@ export class BoardsService {
     return found;
   }
 
-  // deleteBoard(id: string): void {
-  //   const found = this.getBoardById(id);
-  //   this.boards = this.boards.filter((board) => board.id !== found.id);
-  // }
+  async deleteBoard(id: number): Promise<void> {
+    await this.boardRepository.delete(id);
+  }
 
-  // updateBoardStatus(id: string, status: BoardStatus): Board {
-  //   const board = this.getBoardById(id);
-  //   board.status = status;
-  //   return board;
-  // }
+  async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+    const board = await this.getBoardById(id);
+    console.log(board);
+    board.status = status;
+    await board.save();
+    return board;
+  }
 }

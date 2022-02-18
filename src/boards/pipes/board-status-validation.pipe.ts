@@ -9,6 +9,7 @@ export class BoardStatusValidation implements PipeTransform {
     if (!this.isStatusValid(value)) {
       throw new BadRequestException('잘못된 스테이터스입니다.');
     }
+    return value;
   }
 
   private isStatusValid(status: any) {
